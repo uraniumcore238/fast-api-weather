@@ -17,7 +17,6 @@ def get_city_location(city):
     return r.json()[0]['country']
 
 
-
 def get_weather_in_the_city(city):
     load_dotenv()
     country = get_city_location(city)
