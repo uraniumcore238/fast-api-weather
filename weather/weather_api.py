@@ -4,7 +4,7 @@ import httpx
 from dotenv import load_dotenv
 
 
-def get_city_location(city):
+def get_city_location(city: str) -> str:
     load_dotenv()
 
     parameters = {
@@ -14,10 +14,11 @@ def get_city_location(city):
     }
 
     r = httpx.get(f'{os.getenv("BASE_DOMAIN")}/geo/1.0/direct', params=parameters)
-    return r.json()[0]['country']
+    country = r.json()[0]['country']
+    return country
 
 
-def get_weather_in_the_city(city):
+def get_weather_in_the_city(city: str) -> str:
     load_dotenv()
     country = get_city_location(city)
     parameters = {
@@ -27,5 +28,5 @@ def get_weather_in_the_city(city):
     }
 
     r = httpx.get(f'{os.getenv("BASE_DOMAIN")}/data/2.5/weather', params=parameters)
-
-    return f"{r.json()['main']['temp']} °C"
+    temperature = r.json()['main']['temp']
+    return temperature

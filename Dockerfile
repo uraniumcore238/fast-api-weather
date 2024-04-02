@@ -1,15 +1,13 @@
-FROM python:3.11-bookworm
+FROM python:3.11-slim
 
 WORKDIR /app
 
-RUN apt-get update  \
-   && rm -rf /var/lib/apt/lists/
-
 RUN python -m pip install --upgrade pip
+
+COPY requirements.txt /app
 
 RUN python -m pip install -r requirements.txt
 
-COPY . /app
-COPY requirements.txt /app
+COPY weather /app/weather
 
-CMD ["python", "main.py"]
+CMD ["uvicorn", "weather.weather:app", "--host", "0.0.0.0"]
