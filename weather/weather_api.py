@@ -18,7 +18,7 @@ def get_city_location(city: str) -> str:
     return country
 
 
-def get_weather_in_the_city(city: str) -> str:
+def get_weather_in_the_city(city: str) -> float:
     load_dotenv()
     country = get_city_location(city)
     parameters = {
